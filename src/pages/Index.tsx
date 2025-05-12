@@ -2,11 +2,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
-import { Card } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const Index = () => {
+const ModernPortal = () => {
   const currentDate = new Date();
   const formattedDate = new Intl.DateTimeFormat('ru-RU', {
     day: '2-digit',
@@ -15,106 +16,302 @@ const Index = () => {
   }).format(currentDate);
   
   const dayOfWeek = new Intl.DateTimeFormat('ru-RU', { weekday: 'long' }).format(currentDate);
-  const capitalizedDay = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1);
-  
+  const capitalizedDayOfWeek = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1);
+
   const hours = currentDate.getHours().toString().padStart(2, '0');
   const minutes = currentDate.getMinutes().toString().padStart(2, '0');
   
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Верхняя панель */}
-      
-
-Обновим герой-баннер для более современного вида:
-
-<pp-write filepath="src/components/HeroBanner.tsx" partial>
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
-
-const HeroBanner = () => {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-white to-light-gray">
-      {/* Декоративные элементы */}
-      <div className="absolute right-0 -top-10 w-96 h-96 bg-primary-red/5 rounded-full blur-3xl"></div>
-      <div className="absolute -left-10 bottom-0 w-72 h-72 bg-primary-red/10 rounded-full blur-3xl"></div>
-      
-      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-          <div className="animate-enter" style={{animationDelay: '0.1s'}}>
-            <h1 className="text-4xl font-bold tracking-tight text-dark-gray sm:text-5xl lg:text-6xl">
-              Создавайте 
-              <span className="text-primary-red"> потрясающие </span>
-              проекты
-            </h1>
-            <p className="mt-6 text-lg text-neutral-gray">
-              Разрабатывайте современные веб-приложения с минимальными усилиями благодаря нашей платформе. 
-              Быстро, надежно и стильно.
-            </p>
-            <div className="mt-10 flex items-center gap-x-6">
-              <Button className="bg-primary-red hover:bg-primary-red-light text-white px-8 py-6">
-                Начать сейчас <Icon name="ArrowRight" className="ml-2 h-5 w-5" />
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Верхняя навигация */}
+      <header className="bg-primary-red text-white shadow-md">
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" className="text-white hover:bg-primary-red-light">
+                <Icon name="Home" className="mr-2 h-5 w-5" />
+                <span>Главная</span>
               </Button>
-              <Button variant="outline" className="border-neutral-gray text-neutral-gray hover:text-dark-gray">
-                Узнать больше
+              <Button variant="ghost" className="text-white hover:bg-primary-red-light">
+                <Icon name="FileText" className="mr-2 h-5 w-5" />
+                <span>Обзор</span>
+              </Button>
+              <Button variant="ghost" className="text-white hover:bg-primary-red-light">
+                <Icon name="Layers" className="mr-2 h-5 w-5" />
+                <span>Страница</span>
               </Button>
             </div>
             
-            <div className="mt-12 flex items-center">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-white shadow-md overflow-hidden">
-                    <img 
-                      src={`https://source.unsplash.com/100x100/?person&${i}`} 
-                      alt="User" 
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="ml-4">
-                <span className="text-sm font-medium text-dark-gray">Присоединились +1200 разработчиков</span>
-                <div className="flex items-center mt-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Icon key={i} name="Star" className="h-4 w-4 text-primary-red" />
-                  ))}
-                  <span className="ml-2 text-sm text-neutral-gray">4.9/5 рейтинг</span>
-                </div>
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" className="text-white hover:bg-primary-red-light">
+                <Icon name="Bell" className="h-5 w-5" />
+              </Button>
+              <div className="flex items-center">
+                <Avatar className="h-8 w-8 border-2 border-white">
+                  <AvatarImage src="https://source.unsplash.com/100x100/?portrait" alt="Владимир Мартьянов" />
+                  <AvatarFallback>ВМ</AvatarFallback>
+                </Avatar>
+                <span className="ml-2 font-medium">Владимир Мартьянов</span>
+                <Icon name="ChevronDown" className="ml-1 h-4 w-4" />
               </div>
             </div>
           </div>
-          
-          <div className="relative animate-enter" style={{animationDelay: '0.3s'}}>
-            <div className="absolute top-8 -left-4 w-72 h-72 bg-primary-red/10 rounded-full blur-3xl"></div>
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl transform rotate-1 hover:rotate-0 transition-transform duration-500 hover-scale">
-              <img 
-                src="https://source.unsplash.com/800x600/?code,technology" 
-                alt="Coding and technology" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-gray/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6">
-                <span className="inline-block px-3 py-1 mb-3 text-xs font-medium bg-primary-red text-white rounded-full">
-                  Популярное
-                </span>
-                <h3 className="text-xl font-semibold text-white">Разработка современных интерфейсов</h3>
-                <p className="mt-2 text-white/80">Создавайте потрясающие UI компоненты</p>
+        </div>
+      </header>
+      
+      {/* Подзаголовок с логотипом */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto py-2">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <div className="bg-primary-red p-2 rounded shadow-sm">
+                <Icon name="LayoutGrid" className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-primary-red">Оптимизационные предложения</h1>
+                <p className="text-neutral-gray">Мираторг</p>
               </div>
             </div>
             
-            <div className="absolute -bottom-10 right-0 md:right-10 animate-pulse-slow">
-              <div className="bg-white rounded-lg p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform">
-                <div className="flex items-center">
-                  <Icon name="Code" className="h-5 w-5 text-primary-red mr-2" />
-                  <span className="font-medium text-dark-gray">React+TypeScript</span>
+            <div className="flex items-center">
+              <div className="flex items-center mr-6">
+                <div className="bg-primary-red p-3 rounded-l">
+                  <img 
+                    src="https://via.placeholder.com/80x40?text=МИРАТОРГ" 
+                    alt="Мираторг" 
+                    className="h-6"
+                  />
+                </div>
+                <div className="bg-white p-3 rounded-r border-t border-r border-b border-gray-200">
+                  <div className="text-dark-gray font-medium">Корпоративный портал</div>
+                  <div className="flex justify-between items-center">
+                    <div className="text-sm text-neutral-gray">
+                      {formattedDate}
+                      <span className="ml-2">{capitalizedDayOfWeek}</span>
+                    </div>
+                    <div className="text-xl font-bold text-primary-red">
+                      {hours} : {minutes}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+      
+      {/* Поисковая строка */}
+      <div className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto py-2">
+          <div className="flex justify-end">
+            <div className="relative w-72">
+              <Input 
+                type="text" 
+                placeholder="Искать на этом сайте..." 
+                className="pr-10"
+              />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="absolute right-0 top-0 h-full"
+              >
+                <Icon name="Search" className="h-4 w-4" />
+              </Button>
+            </div>
+            <Button variant="ghost" size="icon" className="ml-2">
+              <Icon name="HelpCircle" className="h-5 w-5 text-primary-red" />
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Основной контент */}
+      <div className="flex-1 container mx-auto py-6">
+        <div className="grid grid-cols-4 gap-6">
+          {/* Боковая навигация */}
+          <div className="col-span-1">
+            <Card>
+              <CardHeader className="bg-gray-50 border-b">
+                <CardTitle className="text-base font-medium">Навигация</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <nav className="flex flex-col">
+                  <NavItem label="Портал" active />
+                  <NavItem label="Начальная страница модуля" />
+                  <NavItem label="Ссылки" />
+                  <NavItem 
+                    label="Добавить оптим. предл." 
+                    className="text-sm pl-8 py-2 hover:bg-gray-50 text-neutral-gray"
+                  />
+                  
+                  <div className="py-2 px-4 bg-gray-50 border-t border-b border-gray-200 font-medium">
+                    Библиотеки
+                  </div>
+                  <NavItem label="Справочные материалы" />
+                  
+                  <div className="py-2 px-4 bg-gray-50 border-t border-b border-gray-200 font-medium">
+                    Списки
+                  </div>
+                  <NavItem label="Оптимизационные предложения. Активные" />
+                  <NavItem label="Оптимизационные предложения. Все" />
+                  <NavItem label="Предложения у меня на обработке" />
+                  
+                  <div className="mt-4 border-t border-gray-200">
+                    <NavItem 
+                      label="Корзина" 
+                      icon="Trash2"
+                      className="text-neutral-gray"
+                    />
+                    <NavItem 
+                      label="Весь контент сайта" 
+                      icon="Database"
+                      className="text-neutral-gray"
+                    />
+                  </div>
+                </nav>
+              </CardContent>
+            </Card>
+          </div>
+          
+          {/* Основное содержимое */}
+          <div className="col-span-3">
+            <Tabs defaultValue="all" className="w-full">
+              <TabsList className="grid grid-cols-5 mb-6">
+                <TabsTrigger value="new">Предложить улучшение</TabsTrigger>
+                <TabsTrigger value="my">Созданные мной предложения</TabsTrigger>
+                <TabsTrigger value="processing">Предложения у меня на обработке</TabsTrigger>
+                <TabsTrigger value="inwork">Предложения в обработке</TabsTrigger>
+                <TabsTrigger value="all">Все предложения</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="new" className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Предложить улучшение</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Форма для создания нового предложения по улучшению</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="my" className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Созданные мной предложения</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Список ваших предложений</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="processing" className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Предложения у меня на обработке</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Предложения, требующие вашего внимания</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="inwork" className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Предложения в обработке</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Предложения, находящиеся в процессе обработки</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              
+              <TabsContent value="all" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Все предложения</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Список всех предложений в системе</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border-l-4 border-l-primary-red">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary-red">
+                      <Icon name="BarChart2" className="mr-2 h-5 w-5" />
+                      Отчёт. Распределение экономического эффекта по руководителям
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Данные по экономическому эффекту в разрезе руководителей</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="border-l-4 border-l-primary-red">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary-red">
+                      <Icon name="TrendingUp" className="mr-2 h-5 w-5" />
+                      Отчёт. Результаты развития по проектам
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Данные о результатах развития проектов</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </div>
+      </div>
+      
+      {/* Футер */}
+      <footer className="bg-gray-100 border-t border-gray-200 py-4 mt-8">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-neutral-gray">
+              © 2025 Мираторг. Все права защищены.
+            </div>
+            <div className="flex space-x-4">
+              <a href="#" className="text-sm text-neutral-gray hover:text-primary-red">Поддержка</a>
+              <a href="#" className="text-sm text-neutral-gray hover:text-primary-red">Политика конфиденциальности</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 };
 
-export default HeroBanner;
+// Вспомогательный компонент для пунктов навигации
+interface NavItemProps {
+  label: string;
+  icon?: string;
+  active?: boolean;
+  className?: string;
+}
+
+const NavItem: React.FC<NavItemProps> = ({ 
+  label, 
+  icon, 
+  active = false,
+  className = ""
+}) => {
+  return (
+    <a 
+      href="#" 
+      className={`
+        flex items-center px-4 py-3 hover:bg-gray-50 transition-colors
+        ${active ? 'bg-gray-50 text-primary-red font-medium border-l-4 border-primary-red pl-3' : 'text-dark-gray'}
+        ${className}
+      `}
+    >
+      {icon && <Icon name={icon} className="mr-2 h-4 w-4" />}
+      <span>{label}</span>
+    </a>
+  );
+};
+
+export default ModernPortal;
