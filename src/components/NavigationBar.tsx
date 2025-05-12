@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Icon from '@/components/ui/icon';
+import React from "react";
+import { Link } from "react-router-dom";
+import Icon from "@/components/ui/icon";
 
 const NavigationBar = () => {
   return (
@@ -13,10 +12,12 @@ const NavigationBar = () => {
               <div className="w-10 h-10 bg-primary-red rounded-md flex items-center justify-center text-white font-bold text-xl">
                 P
               </div>
-              <span className="ml-2 text-lg font-bold text-dark-gray">Поехали!</span>
+              <span className="ml-2 text-lg font-bold text-dark-gray">
+                Поехали!
+              </span>
             </Link>
           </div>
-          
+
           <nav className="hidden md:flex items-center space-x-8">
             <NavLink href="/" label="Главная" active />
             <NavLink href="/about" label="О нас" />
@@ -24,7 +25,7 @@ const NavigationBar = () => {
             <NavLink href="/projects" label="Проекты" />
             <NavLink href="/contact" label="Контакты" />
           </nav>
-          
+
           <div className="flex items-center space-x-2">
             <button className="p-2 rounded-full hover:bg-light-gray transition-colors">
               <Icon name="Search" className="h-5 w-5 text-neutral-gray" />
@@ -56,9 +57,7 @@ const NavLink = ({ href, label, active }: NavLinkProps) => (
   <Link
     to={href}
     className={`relative px-1 py-2 font-medium text-sm transition-colors ${
-      active 
-        ? 'text-primary-red' 
-        : 'text-neutral-gray hover:text-dark-gray'
+      active ? "text-primary-red" : "text-neutral-gray hover:text-dark-gray"
     }`}
   >
     {label}

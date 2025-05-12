@@ -1,163 +1,120 @@
 
 import React from 'react';
-import NavigationBar from '@/components/NavigationBar';
-import HeroBanner from '@/components/HeroBanner';
-import ContentCard from '@/components/ContentCard';
-import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import Icon from '@/components/ui/icon';
+import { Card } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+
+const Index = () => {
+  const currentDate = new Date();
+  const formattedDate = new Intl.DateTimeFormat('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).format(currentDate);
+  
+  const dayOfWeek = new Intl.DateTimeFormat('ru-RU', { weekday: 'long' }).format(currentDate);
+  const capitalizedDay = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.slice(1);
+  
+  const hours = currentDate.getHours().toString().padStart(2, '0');
+  const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+  
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Верхняя панель */}
+      
+
+Обновим герой-баннер для более современного вида:
+
+<pp-write filepath="src/components/HeroBanner.tsx" partial>
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
-const Index = () => {
+const HeroBanner = () => {
   return (
-    <div className="min-h-screen bg-white">
-      <NavigationBar />
+    <section className="relative overflow-hidden bg-gradient-to-br from-white to-light-gray">
+      {/* Декоративные элементы */}
+      <div className="absolute right-0 -top-10 w-96 h-96 bg-primary-red/5 rounded-full blur-3xl"></div>
+      <div className="absolute -left-10 bottom-0 w-72 h-72 bg-primary-red/10 rounded-full blur-3xl"></div>
       
-      <main>
-        <HeroBanner />
-        
-        {/* Секция с карточками */}
-        <section className="py-16 bg-light-gray">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-12 animate-enter">
-              <h2 className="text-3xl font-bold text-dark-gray">Почему выбирают нас</h2>
-              <p className="mt-4 text-neutral-gray">
-                Мы предлагаем комплексный подход к разработке, который помогает вам быстрее создавать качественные приложения
-              </p>
+      <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+          <div className="animate-enter" style={{animationDelay: '0.1s'}}>
+            <h1 className="text-4xl font-bold tracking-tight text-dark-gray sm:text-5xl lg:text-6xl">
+              Создавайте 
+              <span className="text-primary-red"> потрясающие </span>
+              проекты
+            </h1>
+            <p className="mt-6 text-lg text-neutral-gray">
+              Разрабатывайте современные веб-приложения с минимальными усилиями благодаря нашей платформе. 
+              Быстро, надежно и стильно.
+            </p>
+            <div className="mt-10 flex items-center gap-x-6">
+              <Button className="bg-primary-red hover:bg-primary-red-light text-white px-8 py-6">
+                Начать сейчас <Icon name="ArrowRight" className="ml-2 h-5 w-5" />
+              </Button>
+              <Button variant="outline" className="border-neutral-gray text-neutral-gray hover:text-dark-gray">
+                Узнать больше
+              </Button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <ContentCard 
-                title="Быстрая разработка" 
-                description="Создавайте и запускайте проекты в кратчайшие сроки с нашими готовыми компонентами."
-                icon="Zap"
-                delay={100}
-              />
-              <ContentCard 
-                title="Отзывчивый дизайн" 
-                description="Все элементы адаптируются под любые устройства без дополнительных настроек."
-                icon="Smartphone"
-                iconBg="bg-blue-100"
-                delay={200}
-              />
-              <ContentCard 
-                title="Простая интеграция" 
-                description="Легко подключайте внешние сервисы и API для расширения функциональности."
-                icon="Link"
-                iconBg="bg-green-100"
-                delay={300}
-              />
-              <ContentCard 
-                title="Высокая производительность" 
-                description="Оптимизированный код обеспечивает быструю загрузку и плавную работу."
-                icon="Gauge"
-                iconBg="bg-yellow-100"
-                delay={400}
-              />
-              <ContentCard 
-                title="Богатая экосистема" 
-                description="Доступ к обширной библиотеке плагинов и интеграций для любых задач."
-                icon="Layers"
-                iconBg="bg-purple-100"
-                delay={500}
-              />
-              <ContentCard 
-                title="Поддержка 24/7" 
-                description="Наша команда всегда готова помочь вам с любыми вопросами в любое время."
-                icon="Headphones"
-                iconBg="bg-orange-100"
-                delay={600}
-              />
-            </div>
-          </div>
-        </section>
-        
-        {/* Секция с большой картинкой */}
-        <section className="py-20 bg-white relative overflow-hidden">
-          <div className="absolute left-0 bottom-0 w-96 h-96 bg-primary-red/10 rounded-full blur-3xl"></div>
-          
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-enter" style={{animationDelay: '0.3s'}}>
-                <div className="relative">
-                  <div className="absolute -z-10 inset-0 bg-primary-red/5 rounded-3xl transform rotate-3"></div>
-                  <img 
-                    src="https://source.unsplash.com/800x600/?workspace,coding" 
-                    alt="Workspace" 
-                    className="rounded-2xl shadow-lg relative z-10"
-                  />
-                  <div className="absolute -bottom-5 -right-5 bg-white rounded-lg p-4 shadow-lg z-20 hover-scale">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-4 h-4 rounded-full bg-green-500"></div>
-                      <span className="text-dark-gray font-medium">24/7 онлайн</span>
-                    </div>
+            <div className="mt-12 flex items-center">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-white shadow-md overflow-hidden">
+                    <img 
+                      src={`https://source.unsplash.com/100x100/?person&${i}`} 
+                      alt="User" 
+                      className="h-full w-full object-cover"
+                    />
                   </div>
-                </div>
+                ))}
               </div>
-              
-              <div className="animate-enter" style={{animationDelay: '0.6s'}}>
-                <h2 className="text-3xl font-bold text-dark-gray">Разрабатывайте проекты без усилий</h2>
-                <p className="mt-4 text-neutral-gray">
-                  Наша платформа предоставляет все необходимые инструменты для разработки современных веб-приложений. 
-                  От быстрого прототипирования до готового развертывания — мы поддерживаем вас на каждом этапе.
-                </p>
-                
-                <ul className="mt-8 space-y-4">
-                  {[
-                    "Современные компоненты интерфейса",
-                    "Поддержка TypeScript из коробки",
-                    "Оптимизированная производительность",
-                    "Подробная документация"
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="flex-shrink-0 mt-1">
-                        <div className="w-5 h-5 rounded-full bg-primary-red/20 flex items-center justify-center">
-                          <Icon name="Check" className="h-3 w-3 text-primary-red" />
-                        </div>
-                      </div>
-                      <span className="ml-3 text-neutral-gray">{item}</span>
-                    </li>
+              <div className="ml-4">
+                <span className="text-sm font-medium text-dark-gray">Присоединились +1200 разработчиков</span>
+                <div className="flex items-center mt-1">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Icon key={i} name="Star" className="h-4 w-4 text-primary-red" />
                   ))}
-                </ul>
-                
-                <div className="mt-10">
-                  <Button className="bg-primary-red hover:bg-primary-red-light text-white">
-                    Начать работу
-                  </Button>
+                  <span className="ml-2 text-sm text-neutral-gray">4.9/5 рейтинг</span>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-        
-        {/* Секция-CTA */}
-        <section className="py-20 bg-primary-red text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center animate-enter" style={{animationDelay: '0.4s'}}>
-              <h2 className="text-3xl font-bold">Готовы начать свой проект?</h2>
-              <p className="mt-4 text-white/80">
-                Присоединяйтесь к тысячам разработчиков, которые уже используют нашу платформу для своих проектов
-              </p>
-              
-              <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <Button className="bg-white text-primary-red hover:bg-light-gray w-full sm:w-auto">
-                  Зарегистрироваться
-                </Button>
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 w-full sm:w-auto">
-                  Узнать больше
-                </Button>
+          
+          <div className="relative animate-enter" style={{animationDelay: '0.3s'}}>
+            <div className="absolute top-8 -left-4 w-72 h-72 bg-primary-red/10 rounded-full blur-3xl"></div>
+            <div className="relative z-10 rounded-2xl overflow-hidden shadow-xl transform rotate-1 hover:rotate-0 transition-transform duration-500 hover-scale">
+              <img 
+                src="https://source.unsplash.com/800x600/?code,technology" 
+                alt="Coding and technology" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-gray/70 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 p-6">
+                <span className="inline-block px-3 py-1 mb-3 text-xs font-medium bg-primary-red text-white rounded-full">
+                  Популярное
+                </span>
+                <h3 className="text-xl font-semibold text-white">Разработка современных интерфейсов</h3>
+                <p className="mt-2 text-white/80">Создавайте потрясающие UI компоненты</p>
               </div>
-              
-              <div className="mt-8 text-white/80">
-                Нет обязательств. Отменить подписку можно в любое время.
+            </div>
+            
+            <div className="absolute -bottom-10 right-0 md:right-10 animate-pulse-slow">
+              <div className="bg-white rounded-lg p-4 shadow-lg transform rotate-3 hover:rotate-0 transition-transform">
+                <div className="flex items-center">
+                  <Icon name="Code" className="h-5 w-5 text-primary-red mr-2" />
+                  <span className="font-medium text-dark-gray">React+TypeScript</span>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
-      
-      <Footer />
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default Index;
+export default HeroBanner;
